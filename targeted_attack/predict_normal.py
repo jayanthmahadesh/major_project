@@ -1,7 +1,7 @@
 # USAGE
 # python3 predict_normal.py --image pig.jpg
-image_path = "violin.jpeg"
-target_class = 889
+image_path = "pig.jpg"
+target_class = 341
 # import necessary packages
 from pyimagesearch.utils import get_class_idx
 from tensorflow.keras.applications import ResNet50
@@ -71,9 +71,9 @@ cv2.putText(output, text, (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.8,
 	(0, 255, 0), 2)
 
 # show the output image
-# cv2.imshow("Output", output)
-# # cv2.waitKey(0)
-# cv2.waitKey(5000)
+cv2.imshow("Output", output)
+# cv2.waitKey(0)
+cv2.waitKey(5000)
 
 
 
@@ -132,7 +132,7 @@ image = cv2.imread(image_path)
 image = preprocess_image(image)
 
 # load the pre-trained ResNet50 model for running inference
-print("[INFO] loading pre-trained ResNet50 model...")
+# print("[INFO] loading pre-trained ResNet50 model...")
 # model = ResNet50(weights="imagenet")
 
 # initialize optimizer and loss function
@@ -173,7 +173,6 @@ temp_image = adverImage
 cv2.putText(temp_image, text, (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 255, 0), 2)
 
 # show the output image
-# cv2.imshow("Output", temp_image)
-# # cv2.waitKey(0)
-# cv2.waitKey(5000)
-
+cv2.imshow("Output", temp_image)
+# cv2.waitKey(0)
+cv2.waitKey(0)

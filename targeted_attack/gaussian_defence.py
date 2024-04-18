@@ -1,5 +1,5 @@
 # USAGE
-# python3 gaussian_defence.py --input adversarial.png --output defence_adversarial
+# python3 gaussian_defence.py --input adversarial.png
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
@@ -64,6 +64,7 @@ args = vars(ap.parse_args())
 
 print("[INFO] loading image...")
 image = cv2.imread(args["input"])
+jayanth = image
 # image = preprocess_image(image)
 print("[INFO] loading pre-trained ResNet50 model...")
 model = ResNet50(weights="imagenet")
@@ -75,6 +76,7 @@ model = ResNet50(weights="imagenet")
 defence_adverImage = apply_input_transformations(image)
 # defence_adverImage = preprocess_image(defence_adverImage)
 # defence_adverImage = add_gaussian_noise(defence_adverImage,noise_std=10)
+output_image = defence_adverImage
 defence_adverImage = preprocess_image(defence_adverImage)
 # defence_adverImage = image
 print("[info] writing output image")
@@ -94,9 +96,9 @@ print("[INFO] label: {} confidence: {:.2f}%".format(label,confidence))
 
 # draw the top-most predicted label on the adversarial image along
 # with the confidence score
-# text = "{}: {:.2f}%".format(label, confidence)
-# cv2.putText(defence_adverImage, text, (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 255, 0), 2)
+text = "{}: {:.2f}%".format(label, confidence)
+cv2.putText(output_image, text, (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 255, 0), 2)
 
 # show the output image
-# cv2.imshow("Output", defence_adverImage)
-# cv2.waitKey(0)
+cv2.imshow("Output", output_image)
+cv2.waitKey(0)
